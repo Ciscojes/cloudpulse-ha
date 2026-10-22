@@ -31,7 +31,7 @@ Para una vista local: `python -m http.server 8765 --bind 127.0.0.1`. Sin los arc
 - `docs/PRUEBAS.md`: resultados y pruebas pendientes.
 - `docs/ARQUITECTURA.md`: arquitectura comprobada y objetivo futuro.
 - `docs/PRESENTACION.md`: guion de presentación.
-- `docs/CIERRE-LABORATORIO.md`: recursos de prueba y limpieza pendiente.
+- `docs/CIERRE-LABORATORIO.md`: cierre y limpieza confirmados por el usuario.
 
 No publicar claves PEM, credenciales ni capturas con información privada de la cuenta. El proyecto no tiene ALB ni ASG y no se ha probado tolerancia a fallos.
 
@@ -50,3 +50,7 @@ Sistema, instancia y EBS aparecen con **Check passed**. No hay alarmas asociadas
 ![Comprobaciones de sistema, instancia y EBS aprobadas](evidence/ec2-status-checks.png)
 
 Estas evidencias corresponden a una única instancia; no demuestran balanceo ni recuperación automática.
+
+## Laboratorio cerrado
+
+El usuario confirmó la limpieza de los recursos de prueba. La web por IP pública era temporal; para presentar el trabajo, usar el código y las capturas conservadas aquí. La limpieza no fue verificada independientemente por la herramienta. Consultar `docs/CIERRE-LABORATORIO.md`.

@@ -16,7 +16,7 @@ Fecha de referencia: 21 de octubre de 2026, Costa Rica. El estado de los recurso
 | Dos destinos saludables detrás de ALB | No ejecutada | No se crearon ALB ni segunda EC2 |
 | Caída de un servidor sin pérdida prolongada de acceso | No ejecutada | Requiere al menos dos destinos saludables y prueba controlada |
 | Reemplazo mediante Auto Scaling | No ejecutada | No se creó ASG |
-| Eliminación de recursos | Consultar documento de cierre | No asumir limpieza sin confirmación de AWS |
+| Eliminación de recursos | Confirmada por el usuario | Terminación y limpieza realizadas manualmente; sin verificación independiente por la herramienta. Ver documento de cierre |
 
 ## Pruebas locales de la interfaz actualizada
 

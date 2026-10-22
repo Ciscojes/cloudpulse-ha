@@ -5,7 +5,7 @@
   "embeddedAssetsMatch": "PASS",
   "bootstrapBytes": 5852,
   "updatedVersionDeployed": "CONFIRMED BY USER",
-  "cleanup": "PENDING",
+  "cleanup": "USER CONFIRMED - NOT INDEPENDENTLY VERIFIED",
   "screenshots": [
     "evidence/cloudpulse-web.png",
     "evidence/ec2-status-checks.png"
