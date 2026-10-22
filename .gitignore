@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+.venv/
+venv/
+
+# Secretos y credenciales
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.aws/
+
+# Archivos temporales
+.DS_Store
+Thumbs.db
+.vscode/
