@@ -9,10 +9,10 @@ Fecha de referencia: 21 de octubre de 2026, Costa Rica. El estado de los recurso
 | Página NGINX por IPv4 pública | Verificado | El navegador mostró CloudPulse HA, el ID real y `eu-west-1a`; inicialmente hubo conexión rechazada durante el arranque y después funcionó |
 | IMDSv2 obligatorio | Verificado | La consola mostró Required y el script de identidad empleó un token |
 | Reglas asociadas a EC2 | Verificado | El grupo creado estaba asociado; HTTP 80 y SSH 22 restringidos a la IP del usuario |
-| Comprobaciones de salud de AWS | Pendiente de confirmación final | Se observaron inicialmente en Initializing; no registrar Passed sin evidencia posterior |
+| Comprobaciones de salud de AWS | Verificado: sistema, instancia y EBS con Check passed | [Captura de EC2](../evidence/ec2-status-checks.png); no hay alarmas asociadas ni comprobación de aplicación configurada |
 | Ruta pública de la subnet | No inspeccionada directamente | La consola VPC no respondió a la herramienta. La web respondió desde la conexión de prueba; eso valida conectividad HTTP puntual, no una auditoría completa de rutas |
 | Despliegue de la primera interfaz | Verificado por salida del usuario y confirmación visual del usuario | El instalador terminó, nginx -t pasó y /healthz devolvió ok |
-| Retirada de toda la demo | Confirmada por el usuario después de actualizar | Captura guardada por el usuario; pendiente de incorporar al repositorio |
+| Interfaz real sin demo | Verificado por captura aportada por el usuario | [Web de CloudPulse](../evidence/cloudpulse-web.png): instance ID real, eu-west-1a y HTTP 200 |
 | Dos destinos saludables detrás de ALB | No ejecutada | No se crearon ALB ni segunda EC2 |
 | Caída de un servidor sin pérdida prolongada de acceso | No ejecutada | Requiere al menos dos destinos saludables y prueba controlada |
 | Reemplazo mediante Auto Scaling | No ejecutada | No se creó ASG |

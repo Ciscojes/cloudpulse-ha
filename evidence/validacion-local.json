@@ -6,5 +6,9 @@
   "bootstrapBytes": 5852,
   "updatedVersionDeployed": "CONFIRMED BY USER",
   "cleanup": "PENDING",
-  "screenshots": "SAVED BY USER - NOT INCLUDED"
+  "screenshots": [
+    "evidence/cloudpulse-web.png",
+    "evidence/ec2-status-checks.png"
+  ],
+  "awsStatusChecks": "System, instance and EBS: Check passed (user screenshot)"
 }

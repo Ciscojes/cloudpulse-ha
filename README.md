@@ -15,7 +15,7 @@ La identidad de `/identity.json` corresponde al servidor que entrega ese archivo
 
 `deploy/install-nginx.sh` instala los tres archivos web en Amazon Linux 2023, obtiene la identidad mediante IMDSv2 y configura NGINX y `/healthz`. No crea infraestructura ni incluye credenciales. Retira el antiguo `script.js` de la demo del directorio web.
 
-El instalador se ejecutó correctamente en EC2: NGINX validó la configuración y /healthz respondió ok. El usuario confirmó después la actualización de la interfaz sin simulación y guardó las capturas de la web y de la consola. Las capturas aún no están incluidas en este repositorio.
+El instalador se ejecutó correctamente en EC2: NGINX validó la configuración y /healthz respondió ok. El usuario confirmó después la actualización de la interfaz sin simulación y guardó las capturas de la web y de la consola. Las capturas de la web y de las comprobaciones de EC2 están incluidas en este repositorio.
 
 ## Verificación local
 
@@ -34,3 +34,19 @@ Para una vista local: `python -m http.server 8765 --bind 127.0.0.1`. Sin los arc
 - `docs/CIERRE-LABORATORIO.md`: recursos de prueba y limpieza pendiente.
 
 No publicar claves PEM, credenciales ni capturas con información privada de la cuenta. El proyecto no tiene ALB ni ASG y no se ha probado tolerancia a fallos.
+
+## Evidencias del despliegue
+
+### Web real en EC2
+
+La captura muestra la identidad `i-0a4f26278c892d1d3`, la zona `eu-west-1a` y una respuesta HTTP 200 de NGINX.
+
+![CloudPulse en EC2 con respuesta HTTP 200](evidence/cloudpulse-web.png)
+
+### Comprobaciones de AWS
+
+Sistema, instancia y EBS aparecen con **Check passed**. No hay alarmas asociadas ni comprobación de aplicación configurada en esta captura.
+
+![Comprobaciones de sistema, instancia y EBS aprobadas](evidence/ec2-status-checks.png)
+
+Estas evidencias corresponden a una única instancia; no demuestran balanceo ni recuperación automática.
