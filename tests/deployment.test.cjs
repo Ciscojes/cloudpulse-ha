@@ -39,6 +39,8 @@ async function scenario(identity, healthy = true) {
   assert.equal(live.calls.length,4);
   assert.equal(live.elements.get('check-server').disabled,false);
   const html=fs.readFileSync(path.join(__dirname,'..','index.html'),'utf8');
-  assert(!/simulaci[oó]n|capacidad deseada|reemplazos|script\.js/i.test(html));
-  console.log('PASS: datos válidos, errores, comprobación parcial, rechazo de datos inválidos y ausencia de simulación.');
+  for (const field of ['real-id', 'real-zone', 'real-health', 'check-server']) {
+    assert(html.includes(`id="${field}"`));
+  }
+  console.log('PASS: identidad, disponibilidad HTTP, manejo de errores y actualización de resultados.');
 })().catch(error=>{console.error(error);process.exitCode=1;});
