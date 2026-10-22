@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CloudPulse HA — Servidor AWS</title><link rel="stylesheet" href="styles.css"></head>
+<body><main class="shell">
+<header><div><div class="eyebrow">PROYECTO EDUCATIVO · AWS EC2</div><h1>☁ CloudPulse <span>HA</span></h1><p>Identidad del servidor y comprobación de acceso web.</p></div><span class="badge" id="web-badge">Sin comprobar</span></header>
+<section class="card" aria-labelledby="server-title"><div class="heading"><div><div class="eyebrow">SERVIDOR QUE RESPONDE</div><h2 id="server-title">Instancia EC2</h2></div><button id="check-server" type="button">Comprobar ahora</button></div>
+<p id="deployment-status" role="status">Consultando el servidor…</p>
+<dl class="identity-grid"><div><dt>Instance ID</dt><dd id="real-id">Sin verificar</dd></div><div><dt>Zona de disponibilidad</dt><dd id="real-zone">Sin verificar</dd></div><div><dt>Respuesta HTTP de NGINX</dt><dd id="real-health">Sin comprobar</dd></div><div><dt>Última comprobación</dt><dd id="real-time">Sin verificar</dd></div></dl>
+<p class="note">La identidad se obtiene de este servidor y la respuesta HTTP se comprueba al abrir la página o pulsar el botón. No es una consulta del estado de EC2 en la consola de AWS.</p></section>
+<section class="card"><div class="eyebrow">ALCANCE ACTUAL</div><h2>Primera instancia desplegada</h2><p>Esta página muestra el servidor que responde. No muestra un inventario de la cuenta ni acredita alta disponibilidad entre varias instancias.</p><div class="flow"><span>Navegador</span><b aria-hidden="true">→</b><span>NGINX en EC2</span></div></section>
+<footer>CloudPulse HA · Proyecto educativo</footer></main><script src="deployment.js"></script></body></html>
