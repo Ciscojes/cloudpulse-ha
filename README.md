@@ -1,56 +1,42 @@
 # CloudPulse HA
 
-Proyecto educativo de AWS con una instancia EC2 y NGINX. La interfaz muestra únicamente datos recibidos del servidor; no incluye servidores ficticios, contadores inventados ni botones que simulen acciones de AWS.
+Proyecto educativo desplegado en AWS EC2 que muestra la identidad del servidor y comprueba su respuesta HTTP mediante NGINX.
 
-## Pantalla actual
+## Implementación
 
-- Instance ID y zona obtenidos con IMDSv2 durante la instalación.
-- Comprobación HTTP real de `/healthz` al abrir la página o pulsar «Comprobar ahora».
-- Hora local del intento de comprobación.
-- Si un dato no está disponible, se muestra «Sin verificar» o «Sin respuesta válida».
+- Una instancia EC2 `t3.micro` con Amazon Linux 2023 en `eu-west-1a`.
+- NGINX para servir la interfaz HTML, CSS y JavaScript.
+- Instance ID y zona obtenidos mediante IMDSv2 obligatorio.
+- Comprobación HTTP de `/healthz`, con actualización manual desde la interfaz.
+- Volumen raíz EBS gp3 de 8 GiB cifrado.
+- Acceso HTTP y SSH restringido a la IP autorizada durante la prueba.
 
-La identidad de `/identity.json` corresponde al servidor que entrega ese archivo. No es una consulta de inventario ni del estado de EC2 en AWS. La comprobación HTTP valida la entrega de `ok` por NGINX, no una consulta interna de systemd. Con una sola instancia todavía no existe alta disponibilidad.
-
-## Despliegue
-
-`deploy/install-nginx.sh` instala los tres archivos web en Amazon Linux 2023, obtiene la identidad mediante IMDSv2 y configura NGINX y `/healthz`. No crea infraestructura ni incluye credenciales. Retira el antiguo `script.js` de la demo del directorio web.
-
-El instalador se ejecutó correctamente en EC2: NGINX validó la configuración y /healthz respondió ok. El usuario confirmó después la actualización de la interfaz sin simulación y guardó las capturas de la web y de la consola. Las capturas de la web y de las comprobaciones de EC2 están incluidas en este repositorio.
-
-## Verificación local
-
-```powershell
-node --check deployment.js
-node tests/deployment.test.cjs
+```mermaid
+flowchart LR
+  U[Navegador] -->|HTTP 80| S[Security group]
+  S --> E[EC2 en eu-west-1a]
+  E --> N[NGINX · CloudPulse]
 ```
 
-Para una vista local: `python -m http.server 8765 --bind 127.0.0.1`. Sin los archivos de identidad y salud generados en EC2, la página mostrará datos sin verificar; no inventa respuestas.
+## Resultado
 
-## Documentación
+La web respondió **HTTP 200 · ok** y mostró la identidad real de la instancia. Las comprobaciones de sistema, instancia y EBS de AWS terminaron en **Check passed**.
 
-- `docs/PRUEBAS.md`: resultados y pruebas pendientes.
-- `docs/ARQUITECTURA.md`: arquitectura comprobada y objetivo futuro.
-- `docs/PRESENTACION.md`: guion de presentación.
-- `docs/CIERRE-LABORATORIO.md`: cierre y limpieza confirmados por el usuario.
+![CloudPulse desplegado en AWS](evidence/cloudpulse-web.png)
 
-No publicar claves PEM, credenciales ni capturas con información privada de la cuenta. El proyecto no tiene ALB ni ASG y no se ha probado tolerancia a fallos.
+[Ver resultados y evidencia de EC2](docs/RESULTADOS.md)
 
-## Evidencias del despliegue
+## Alcance
 
-### Web real en EC2
+La interfaz utiliza respuestas del servidor, sin datos simulados. No consulta el inventario ni el estado de EC2 mediante la API de AWS.
 
-La captura muestra la identidad `i-0a4f26278c892d1d3`, la zona `eu-west-1a` y una respuesta HTTP 200 de NGINX.
+Esta fase comprende una única instancia. No incluye balanceador, Auto Scaling ni una prueba de alta disponibilidad.
 
-![CloudPulse en EC2 con respuesta HTTP 200](evidence/cloudpulse-web.png)
+**Estado:** laboratorio finalizado. La limpieza de los recursos fue confirmada por el responsable del proyecto; la web por IP pública no es una publicación permanente.
 
-### Comprobaciones de AWS
+## Contenido del repositorio
 
-Sistema, instancia y EBS aparecen con **Check passed**. No hay alarmas asociadas ni comprobación de aplicación configurada en esta captura.
-
-![Comprobaciones de sistema, instancia y EBS aprobadas](evidence/ec2-status-checks.png)
-
-Estas evidencias corresponden a una única instancia; no demuestran balanceo ni recuperación automática.
-
-## Laboratorio cerrado
-
-El usuario confirmó la limpieza de los recursos de prueba. La web por IP pública era temporal; para presentar el trabajo, usar el código y las capturas conservadas aquí. La limpieza no fue verificada independientemente por la herramienta. Consultar `docs/CIERRE-LABORATORIO.md`.
+- `index.html`, `styles.css`, `deployment.js`: interfaz web.
+- `deploy/install-nginx.sh`: instalador del sitio para Amazon Linux 2023.
+- `tests/deployment.test.cjs`: pruebas del módulo de identidad y comprobación HTTP.
+- `docs/RESULTADOS.md` y `evidence/`: resultados y capturas del despliegue.

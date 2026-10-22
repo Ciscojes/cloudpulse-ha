@@ -1,5 +1,0 @@
-PASS: sintaxis JavaScript.
-PASS: datos válidos, errores, comprobación parcial, datos inválidos y actualización manual.
-PASS: sin elementos de demo en el HTML.
-PASS: archivo comprimido coincide con los tres archivos web actuales.
-CONFIRMADO POR EL USUARIO: actualización ejecutada en EC2. Capturas guardadas por el usuario; no incorporadas al repositorio.
